@@ -16,9 +16,9 @@ public class RoombaMove : MonoBehaviour {
 		
 		playerRigidBody.velocity = player.forward * 10f + Physics.gravity;
 		Ray moveRay = new Ray (player.position, transform.forward);
-		if (Physics.SphereCast (moveRay, 0.1f, 1f)) {
+		if (Physics.SphereCast (moveRay, 0.1f, 0.5f)) {
 			player.Rotate (0f, rotate [Random.Range (0, 2)], 0f);;
 		}
-		Debug.DrawRay (moveRay.origin, moveRay.direction * 1f);
+		Debug.DrawRay (moveRay.origin, moveRay.direction * 0.5f);
 	}
 }
