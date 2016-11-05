@@ -6,6 +6,8 @@ public class Cat : MonoBehaviour {
 	public Transform mouse;
 	public Transform cat;
 	public Rigidbody catRigidBody;
+	float visionConeCat = 60f;
+	float distanceSeen = 0.6f;
 	// Use this for initialization
 	void Start () {
 		catRigidBody = cat.GetComponent<Rigidbody> ();
@@ -17,12 +19,12 @@ public class Cat : MonoBehaviour {
 			return;
 		}
 		Vector3 directionToMouse = mouse.position - transform.position;
-		if (Vector3.Angle (directionToMouse, transform.forward) < 60) {
+		if (Vector3.Angle (directionToMouse, transform.forward) < visionConeCat) {
 			Ray catRay = new Ray (transform.position, directionToMouse);
 			RaycastHit catRayHitInfo;
 			if (Physics.Raycast (catRay, out catRayHitInfo, 10f)) {
 				if (catRayHitInfo.collider.tag != "Wall") {
-					if (catRayHitInfo.distance < 0.6f) {
+					if (catRayHitInfo.distance < distanceSeen) {
 						if (catRayHitInfo.collider.tag == "Mouse") {
 							Destroy (mouse.gameObject);
 						}
