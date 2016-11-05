@@ -6,7 +6,7 @@ public class Mouse : MonoBehaviour {
 	public Transform cat;
 	public Transform mouse;
 	public Rigidbody mouseRigidbody;
-	float visionConeMouse = 30f;
+	float visionConeMouse = 60f;
 	void Start(){
 		mouseRigidbody = mouse.GetComponent<Rigidbody> ();
 	}

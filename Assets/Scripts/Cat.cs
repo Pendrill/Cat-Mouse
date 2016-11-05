@@ -6,7 +6,7 @@ public class Cat : MonoBehaviour {
 	public Transform mouse;
 	public Transform cat;
 	public Rigidbody catRigidBody;
-	float visionConeCat = 60f;
+	float visionConeCat = 45f;
 	float distanceSeen = 0.6f;
 	// Use this for initialization
 	void Start () {
