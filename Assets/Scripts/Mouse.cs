@@ -11,12 +11,13 @@ public class Mouse : MonoBehaviour {
 	}
 	void FixedUpdate () {
 		Vector3 directionToCat = cat.position - transform.position;
-		Debug.Log (directionToCat);
+		//Debug.Log (directionToCat);
 		if (Vector3.Angle (directionToCat, transform.forward) < 30) {
 			Ray mouseRay = new Ray (transform.position, directionToCat);
 			RaycastHit mouseRayHitInfo;
 			if(Physics.Raycast( mouseRay, out mouseRayHitInfo, 100f)){
-				if(mouseRayHitInfo.collider.tag == "Cat"){
+				if(mouseRayHitInfo.collider.tag == "Cat" && mouseRayHitInfo.collider.tag != "Wall"){
+					Debug.Log ("Mouse Run!");
 					mouseRigidbody.AddForce (-directionToCat.normalized * 1200f);
 					//mouse.Rotate (0f, 90f, 0f);;
 				}
