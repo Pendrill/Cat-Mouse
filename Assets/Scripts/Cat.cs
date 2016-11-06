@@ -7,10 +7,13 @@ public class Cat : MonoBehaviour {
 	public Transform cat;
 	public Rigidbody catRigidBody;
 	float visionConeCat = 45f;
-	float distanceSeen = 0.6f;
+	float distanceSeen = 0.8f;
+	public AudioClip[] catSounds;
+	public AudioSource catAudio;
 	// Use this for initialization
 	void Start () {
 		catRigidBody = cat.GetComponent<Rigidbody> ();
+		catAudio = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -27,8 +30,12 @@ public class Cat : MonoBehaviour {
 					if (catRayHitInfo.distance < distanceSeen) {
 						if (catRayHitInfo.collider.tag == "Mouse") {
 							Destroy (mouse.gameObject);
+							catAudio.PlayOneShot(catSounds[1]);
 						}
 					} else {
+						if (!catAudio.isPlaying) {
+							catAudio.PlayOneShot (catSounds [0]);
+						}
 						Debug.Log ("Adding Force to Cat");
 						catRigidBody.AddForce (directionToMouse.normalized * 1200f);
 					}

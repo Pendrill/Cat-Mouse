@@ -7,8 +7,11 @@ public class Mouse : MonoBehaviour {
 	public Transform mouse;
 	public Rigidbody mouseRigidbody;
 	float visionConeMouse = 60f;
+	public AudioSource mouseAudio;
+
 	void Start(){
 		mouseRigidbody = mouse.GetComponent<Rigidbody> ();
+		mouseAudio = GetComponent<AudioSource> ();
 	}
 	void FixedUpdate () {
 		Vector3 directionToCat = cat.position - transform.position;
@@ -19,6 +22,9 @@ public class Mouse : MonoBehaviour {
 			if(Physics.Raycast( mouseRay, out mouseRayHitInfo, 100f)){
 				if(mouseRayHitInfo.collider.tag == "Cat" && mouseRayHitInfo.collider.tag != "Wall"){
 					Debug.Log ("Mouse Run!");
+					if (!mouseAudio.isPlaying) {
+						mouseAudio.Play();
+					}
 					mouseRigidbody.AddForce (-directionToCat.normalized * 1200f);
 					//mouse.Rotate (0f, 90f, 0f);;
 				}
